@@ -16,9 +16,10 @@ class CreatePromosTable extends Migration
         Schema::create('promos', function (Blueprint $table) {
             $table->id();
             $table->boolean('active');
-            $table->integer('porcentaje');
-            $table->dateTime('fechaInicio');
-            $table->dateTime('fechaFin');
+            $table->string('center_name');
+            $table->string('product_name');
+            $table->double('price');
+            $table->string('month');
             $table->timestamps();
         });
     }

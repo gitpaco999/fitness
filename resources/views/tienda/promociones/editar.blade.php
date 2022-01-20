@@ -7,7 +7,7 @@
         </div>
         <br>
         <div class="nav">
-           <a href="{{route('promociones.reg')}}" class="btn btn-success ms-auto m-2">Nueva Promoción</a>
+            <a href="{{route('promociones.reg')}}" class="btn btn-success ms-auto m-2">Nueva Promoción</a>
         </div>
         <br>
            <table class="table table-bordered table-sm table-striped text-center">
@@ -30,16 +30,30 @@
                                     <td>{{ $promocion->center_name }}</td>
                                     <td>{{ $promocion->product_name }}</td>
                                     <td>{{ $promocion->price }}</td>
-                                    <td>{{ $promocion->month }}</td>
-                                    <td>{{ $promocion->created_at }}</td>
                                     <td>
-                                        <form action="{{ route('promociones.destroy',$promocion->id) }}" method="get">
-                                        <button type="submit" class="btn btn-default btn-danger">Eliminar</button>
+                                        <select name="month" class="form-control">
+                                            <option>Enero</option>
+                                            <option>Febrero</option>
+                                            <option>Marzo</option>
+                                            <option>Abril</option>
+                                            <option>Mayo</option>
+                                            <option>Junio</option>
+                                            <option>Julio</option>
+                                            <option>Agosto</option>
+                                            <option>Septiembre</option>
+                                            <option>Octubre</option>
+                                            <option>Noviembre</option>
+                                            <option>Diciembre</option></select></td>
+                                    <td>{{ $promocion->created_at }}</td>
+                                 
+                                    <td>
+                                        <form action="{{ route('promociones.update') }}" method="get">
+                                        <button type="submit" class="btn btn-default btn-danger">Guardar</button>
                                         </form>
-                                        <a class="btn btn-default btn-primary" href="{{route('promociones.edit')}}">Editar</button>
+                                        <a class="btn btn-default btn-primary" href="{{route('promociones.index')}}" >Volver</a>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @endforeach   
                         </tbody>
                     </table>
 
@@ -49,4 +63,3 @@
     </div>
 
 @endsection
-

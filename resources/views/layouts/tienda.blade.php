@@ -45,7 +45,12 @@
                     Clientes
                 </a>
             </li>
-
+            <li>
+                <a class="nav-link" href="{{ url('/tienda/promocion') }}">
+                    <span data-feather="shopping-cart"></span>
+                    Promociones
+                </a>
+            </li>
         </ul>
 
 

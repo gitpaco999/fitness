@@ -8,6 +8,7 @@ use App\Models\Warehouse;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\Sale;
+use App\Models\Promo;
 use GuzzleHttp\RedirectMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
@@ -49,6 +50,12 @@ class TiendaController extends Controller
    {
       $ventas = Sale::latest()->paginate(5);
       return view('tienda.ventas', compact('ventas', $ventas));
+   }
+
+   public function indexPromocion(){
+      $promociones = Promo::all();
+      
+      return view('tienda.promociones',compact('promociones'));
    }
 
    public function nuevoProductoForm()
@@ -151,4 +158,44 @@ class TiendaController extends Controller
       $producto->destroy($producto->id);
       return redirect()->route('productos');
    }
+
+   //By Marisol Benitez
+   public function newPromo(Request $request){
+      $promo = new Promo();
+      $promo->center_name = $request->input('center_name');
+      $promo->product_name = $request->input('product_name');
+      $promo->price = $request->input('price');
+      $promo->month = $request->input('month');
+      $promo->active=True;
+      $promo->save();
+      return redirect('tienda/promocion');
+  }
+
+  public function viewPromo(){
+      $promo = Promo::select('center_name')->get();
+      return redirect('tienda/promocion');
+  }
+
+  public function PromoForm()
+  {
+   return view('tienda.promociones.registrar');
+  }
+
+  public function editPromo(){
+   $promociones = Promo::all();
+      
+   return view('tienda.promociones.editar',compact('promociones'));
+  }
+
+  public function updatePromo(Request $request, Promo $promocion){
+      $promocion->fill($request->input())->saveOrFail();
+      return redirect('tienda/promocion');
+  }
+  //By Marisol Benitez
+  public function destroyPromo($id){
+   $promocion = Promo::find($id);
+   $promocion->delete();
+   return redirect('tienda/promocion');
+      
+  }
 }
